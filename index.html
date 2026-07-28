@@ -1,210 +1,339 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manos a la Obra — Cooperativa de Trabajo | Olavarría</title>
-<meta name="description" content="Cooperativa de trabajo Manos a la Obra: gestión del Cementerio Parque Loma de Paz y servicios de construcción en Olavarría.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
+<x-dc>
 
-<a class="skip-link" href="#main">Saltar al contenido</a>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; font-family: 'IBM Plex Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+    * { box-sizing: border-box; }
+    a { color: #2C6E9E; text-decoration: none; }
+    a:hover { color: #1B2A4A; }
+    ::selection { background: #5AA9E6; color: #fff; }
+    input, textarea, select { font-family: 'IBM Plex Sans', sans-serif; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 860px) {
+      #nav-links, #nav-cta { display: none !important; }
+      #nav-burger { display: block !important; }
+      #hero-grid { grid-template-columns: 1fr !important; }
+      #construccion-block, #cementerio-block { grid-template-columns: 1fr !important; }
+      #cementerio-img { order: 1 !important; }
+      #cementerio-text { order: 2 !important; }
+      #stats-grid, #nosotros-grid, #sedes-grid, #form-grid { grid-template-columns: 1fr !important; }
+      #gal-1, #gal-2 { grid-template-columns: repeat(2,1fr) !important; }
+      h1 { font-size: 38px !important; }
+      h2 { font-size: 30px !important; }
+    }
+  </style>
+  <script src="./image-slot.js"></script>
+</helmet>
 
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a href="#inicio" class="brand">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-name">Manos a la Obra</span>
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="site-nav" id="siteNav">
-      <a href="#inicio">Inicio</a>
-      <a href="#sectores">Sectores</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-  </div>
-</header>
+<div style="background:#FFFFFF;color:#1B2A4A;overflow-x:hidden">
 
-<main id="main">
-
-  <!-- INICIO -->
-  <section id="inicio" class="hero">
-    <div class="wrap hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow">Cooperativa de trabajo · Olavarría</p>
-        <h1>Manos a la obra,<br>todos los días.</h1>
-        <p class="lead">
-          Somos una cooperativa de trabajo de Olavarría. Nos organizamos entre
-          compañeros y compañeras para sostener servicios que la comunidad
-          necesita todos los días: el cuidado del Cementerio Parque Loma de Paz
-          y trabajos de construcción. Creemos en el trabajo asociado como forma
-          de generar empleo genuino y de cuidar lo que es de todos.
-        </p>
-        <div class="hero-actions">
-          <a href="#sectores" class="btn btn-primary">Ver nuestros sectores</a>
-          <a href="#contacto" class="btn btn-ghost">Contactanos</a>
-        </div>
+  <!-- NAV -->
+  <header style="position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);border-bottom:1px solid #D8E3EC">
+    <div style="max-width:1240px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="#inicio" style="display:flex;align-items:center;gap:12px">
+        <img src="assets/logo-coop.png" alt="Manos a la Obra" style="height:44px;width:auto;object-fit:contain" />
+      </a>
+      <nav id="nav-links" style="display:flex;align-items:center;gap:36px">
+        <a href="#inicio" style="font-size:15px;font-weight:500;color:#1B2A4A">Inicio</a>
+        <a href="#sectores" style="font-size:15px;font-weight:500;color:#1B2A4A">Sectores</a>
+        <a href="#nosotros" style="font-size:15px;font-weight:500;color:#1B2A4A">Nosotros</a>
+        <a href="#contacto" style="font-size:15px;font-weight:500;color:#1B2A4A">Contacto</a>
+      </nav>
+      <a id="nav-cta" href="{{ waConstruccion }}" target="_blank" rel="noopener" style="display:flex;background:#2C6E9E;color:#fff;padding:12px 24px;border-radius:100px;font-size:14px;font-weight:600;white-space:nowrap;box-shadow:0 8px 20px -8px rgba(44,110,158,0.55)">
+        Pedí tu presupuesto
+      </a>
+      <button id="nav-burger" onClick="{{ toggleMenu }}" style="display:none;background:none;border:none;font-size:26px;color:#1B2A4A;cursor:pointer;padding:4px 8px">☰</button>
+    </div>
+    <sc-if value="{{ menuOpen }}">
+      <div style="display:flex;flex-direction:column;gap:0;border-top:1px solid #D8E3EC;padding:8px 32px 20px">
+        <a href="#inicio" onClick="{{ closeMenu }}" style="padding:12px 0;font-size:16px;font-weight:500;color:#1B2A4A;border-bottom:1px solid #EAF3FB">Inicio</a>
+        <a href="#sectores" onClick="{{ closeMenu }}" style="padding:12px 0;font-size:16px;font-weight:500;color:#1B2A4A;border-bottom:1px solid #EAF3FB">Sectores</a>
+        <a href="#nosotros" onClick="{{ closeMenu }}" style="padding:12px 0;font-size:16px;font-weight:500;color:#1B2A4A;border-bottom:1px solid #EAF3FB">Nosotros</a>
+        <a href="#contacto" onClick="{{ closeMenu }}" style="padding:12px 0;font-size:16px;font-weight:500;color:#1B2A4A">Contacto</a>
+        <a href="{{ waConstruccion }}" target="_blank" rel="noopener" style="margin-top:14px;text-align:center;background:#2C6E9E;color:#fff;padding:14px;border-radius:100px;font-size:15px;font-weight:600">Pedí tu presupuesto</a>
       </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="hero-block block-cementerio">
-          <span>Cementerio</span>
-          <strong>Parque Loma de Paz</strong>
-        </div>
-        <div class="hero-block block-construccion">
-          <span>Construcción</span>
-          <strong>Albañilería general</strong>
-        </div>
+    </sc-if>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" style="background:linear-gradient(180deg,#EAF3FB 0%,#FFFFFF 100%);padding:96px 32px 80px">
+   <div id="hero-grid" style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:56px;align-items:center;max-width:1240px;margin:0 auto">
+    <div style="animation:fadeUp 0.7s ease both">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #D8E3EC;padding:7px 16px;border-radius:100px;font-size:13px;font-weight:600;color:#2C6E9E;margin-bottom:28px">
+        Cooperativa de trabajo · Olavarría
+      </div>
+      <h1 style="font-size:56px;line-height:1.08;font-weight:700;letter-spacing:-0.02em;margin:0 0 24px;color:#1B2A4A">
+        Trabajo organizado y colectivo al servicio de la comunidad
+      </h1>
+      <p style="font-size:19px;line-height:1.6;color:#3B4A63;margin:0 0 36px;max-width:520px">
+        Somos Manos a la Obra: sostenemos el Cementerio Parque Loma de Paz y realizamos trabajos de construcción, generando empleo genuino y cuidando lo que es de todos.
+      </p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <a href="{{ waConstruccion }}" target="_blank" rel="noopener" style="background:#2C6E9E;color:#fff;padding:16px 32px;border-radius:100px;font-size:16px;font-weight:600;box-shadow:0 12px 28px -10px rgba(44,110,158,0.6)">
+          Pedí tu presupuesto
+        </a>
+        <a href="#sectores" style="background:#fff;color:#1B2A4A;padding:16px 32px;border-radius:100px;font-size:16px;font-weight:600;border:1px solid #D8E3EC">
+          Conocé nuestros sectores
+        </a>
       </div>
     </div>
+    <image-slot id="hero-img" shape="rounded" radius="28" placeholder="Foto/video: equipo o predio (hero)" style="width:100%;height:440px;box-shadow:0 30px 60px -30px rgba(27,42,74,0.35)"></image-slot>
+   </div>
   </section>
 
   <!-- SECTORES -->
-  <section id="sectores" class="sectores">
-    <div class="wrap">
-      <p class="eyebrow">Qué hacemos</p>
-      <h2>Dos sectores, un mismo compromiso</h2>
+  <section id="sectores" style="padding:100px 32px;max-width:1240px;margin:0 auto">
+    <div style="text-align:center;max-width:680px;margin:0 auto 64px">
+      <div style="font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#2C6E9E;margin-bottom:14px">Sectores</div>
+      <h2 style="font-size:40px;font-weight:700;letter-spacing:-0.01em;margin:0;color:#1B2A4A">Dos áreas, un mismo compromiso</h2>
+    </div>
 
-      <div class="sector-grid">
-        <article class="sector-card">
-          <div class="sector-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none"><path d="M24 4 34 14v6H14v-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 20h28v22H10z" stroke="currentColor" stroke-width="2"/><path d="M20 42v-10h8v10" stroke="currentColor" stroke-width="2"/><path d="M16 26h4M28 26h4" stroke="currentColor" stroke-width="2"/></svg>
-          </div>
-          <h3>Cementerio Parque Loma de Paz</h3>
-          <p>
-            Desde septiembre de 2024 estamos a cargo del cuidado y mantenimiento
-            del Cementerio Parque Loma de Paz, con el mismo equipo que ya venía
-            trabajando en el predio. Nos ocupamos de la administración y
-            trámites, la atención en sepelios y el cuidado de los espacios
-            verdes, para acompañar a las familias con respeto y cercanía.
-          </p>
-          <ul class="sector-list">
-            <li>Administración y trámites</li>
-            <li>Atención en sepelios</li>
-            <li>Mantenimiento de espacios verdes</li>
-          </ul>
-          <a href="#contacto" class="sector-link">Consultar por este sector →</a>
-        </article>
-
-        <article class="sector-card">
-          <div class="sector-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none"><path d="M6 40h36" stroke="currentColor" stroke-width="2"/><path d="M10 40V20l8-6 8 6v20" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M28 40V14l10-6 4 3v29" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 26h4M14 32h4" stroke="currentColor" stroke-width="2"/></svg>
-          </div>
-          <h3>Construcción</h3>
-          <p>
-            Hacemos trabajos de albañilería en general: pozos de baño, fachadas,
-            paredones, pintura, durlok y soldadura. Ponemos manos a la obra en
-            cada proyecto, grande o chico, con la misma dedicación de siempre.
-          </p>
-          <ul class="sector-list">
-            <li>Pozos de baño y fachadas</li>
-            <li>Paredones y pintura</li>
-            <li>Durlok y soldadura</li>
-          </ul>
-          <a href="#contacto" class="sector-link">Consultar por este sector →</a>
-        </article>
+    <!-- Construcción — comercial focus -->
+    <div id="construccion-block" style="background:#1B2A4A;border-radius:28px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-bottom:32px;box-shadow:0 30px 60px -30px rgba(27,42,74,0.5)">
+      <div style="padding:56px 56px 56px 56px;display:flex;flex-direction:column;justify-content:center">
+        <div style="display:inline-flex;width:fit-content;background:#5AA9E6;color:#1B2A4A;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:20px">Construcción</div>
+        <h3 style="font-size:30px;font-weight:700;color:#fff;margin:0 0 16px;line-height:1.2">Albañilería general para cada proyecto</h3>
+        <p style="font-size:16px;line-height:1.65;color:#C7D4E6;margin:0 0 24px">
+          Hacemos trabajos de albañilería en general: pozos de baño, fachadas, paredones, pintura, durlok y soldadura. Ponemos manos a la obra en cada proyecto, grande o chico, con la misma dedicación de siempre.
+        </p>
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px">
+          <li style="display:flex;align-items:center;gap:12px;color:#fff;font-size:15px;font-weight:500"><span style="width:8px;height:8px;border-radius:50%;background:#5AA9E6;flex-shrink:0"></span>Pozos de baño y fachadas</li>
+          <li style="display:flex;align-items:center;gap:12px;color:#fff;font-size:15px;font-weight:500"><span style="width:8px;height:8px;border-radius:50%;background:#5AA9E6;flex-shrink:0"></span>Paredones y pintura</li>
+          <li style="display:flex;align-items:center;gap:12px;color:#fff;font-size:15px;font-weight:500"><span style="width:8px;height:8px;border-radius:50%;background:#5AA9E6;flex-shrink:0"></span>Durlok y soldadura</li>
+        </ul>
+        <a href="{{ waConstruccion }}" target="_blank" rel="noopener" style="width:fit-content;background:#5AA9E6;color:#1B2A4A;padding:15px 28px;border-radius:100px;font-size:15px;font-weight:700">Consultá por tu obra →</a>
       </div>
+      <image-slot id="construccion-img" shape="rect" placeholder="Foto/video: obra de construcción" style="width:100%;height:100%;min-height:360px"></image-slot>
+    </div>
+    <div id="gal-1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:80px">
+      <image-slot id="construccion-g1" shape="rounded" radius="18" placeholder="Foto: obra 1" style="width:100%;height:160px"></image-slot>
+      <image-slot id="construccion-g2" shape="rounded" radius="18" placeholder="Foto: obra 2" style="width:100%;height:160px"></image-slot>
+      <image-slot id="construccion-g3" shape="rounded" radius="18" placeholder="Foto: obra 3" style="width:100%;height:160px"></image-slot>
+    </div>
+
+    <!-- Cementerio — informational -->
+    <div id="cementerio-block" style="background:#fff;border:1px solid #D8E3EC;border-radius:28px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)">
+      <image-slot id="cementerio-img" shape="rect" placeholder="Foto/video: Cementerio Parque Loma de Paz" style="width:100%;height:100%;min-height:360px;order:2"></image-slot>
+      <div id="cementerio-text" style="padding:56px;display:flex;flex-direction:column;justify-content:center;order:1">
+        <div style="display:inline-flex;width:fit-content;background:#EAF3FB;color:#2C6E9E;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:20px">Cementerio Parque Loma de Paz</div>
+        <h3 style="font-size:30px;font-weight:700;color:#1B2A4A;margin:0 0 16px;line-height:1.2">Cuidado y acompañamiento desde 2024</h3>
+        <p style="font-size:16px;line-height:1.65;color:#3B4A63;margin:0 0 24px">
+          Desde septiembre de 2024 estamos a cargo del cuidado y mantenimiento del Cementerio Parque Loma de Paz, con el mismo equipo que ya venía trabajando en el predio. Nos ocupamos de la administración y trámites, la atención en sepelios y el cuidado de los espacios verdes, para acompañar a las familias con respeto y cercanía.
+        </p>
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px">
+          <li style="display:flex;align-items:center;gap:12px;color:#1B2A4A;font-size:15px;font-weight:500"><span style="width:8px;height:8px;border-radius:50%;background:#2C6E9E;flex-shrink:0"></span>Administración y trámites</li>
+          <li style="display:flex;align-items:center;gap:12px;color:#1B2A4A;font-size:15px;font-weight:500"><span style="width:8px;height:8px;border-radius:50%;background:#2C6E9E;flex-shrink:0"></span>Atención en sepelios</li>
+          <li style="display:flex;align-items:center;gap:12px;color:#1B2A4A;font-size:15px;font-weight:500"><span style="width:8px;height:8px;border-radius:50%;background:#2C6E9E;flex-shrink:0"></span>Mantenimiento de espacios verdes</li>
+        </ul>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="https://cementerio-app-nhsw.onrender.com/" target="_blank" rel="noopener" style="background:#2C6E9E;color:#fff;padding:14px 24px;border-radius:100px;font-size:14px;font-weight:600">Buscar una sepultura</a>
+          <a href="https://cementerio-app-nhsw.onrender.com/" target="_blank" rel="noopener" style="background:#fff;color:#1B2A4A;padding:14px 24px;border-radius:100px;font-size:14px;font-weight:600;border:1px solid #D8E3EC">Consultas y reclamos</a>
+        </div>
+      </div>
+    </div>
+    <div id="gal-2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px">
+      <image-slot id="cementerio-g1" shape="rounded" radius="18" placeholder="Foto: predio 1" style="width:100%;height:160px"></image-slot>
+      <image-slot id="cementerio-g2" shape="rounded" radius="18" placeholder="Foto: predio 2" style="width:100%;height:160px"></image-slot>
+      <image-slot id="cementerio-g3" shape="rounded" radius="18" placeholder="Foto: predio 3" style="width:100%;height:160px"></image-slot>
     </div>
   </section>
 
-  <!-- NOSOTROS / HISTORIA -->
-  <section id="nosotros" class="nosotros">
-    <div class="wrap nosotros-inner">
-      <div class="nosotros-copy">
-        <p class="eyebrow">Nuestra historia</p>
-        <h2>De 2022 a hoy</h2>
-        <p>
-          Manos a la Obra nació en 2022 como cooperativa de trabajo, y hoy somos
-          22 asociados y asociadas sosteniendo esta organización. En septiembre
-          de 2024 asumimos la gestión del Cementerio Parque Loma de Paz, luego
-          de que finalizara el contrato de concesión que durante ocho años
-          estuvo a cargo de Transporte Malvinas. Seguimos creciendo, sosteniendo
-          puestos de trabajo genuino y sumando nuevas áreas de servicio para
-          la comunidad.
+  <!-- NOSOTROS -->
+  <section id="nosotros" style="background:#1B2A4A;padding:100px 32px;color:#fff">
+    <div style="max-width:1240px;margin:0 auto">
+      <div style="text-align:center;max-width:680px;margin:0 auto 64px">
+        <div style="font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#5AA9E6;margin-bottom:14px">Nosotros</div>
+        <h2 style="font-size:40px;font-weight:700;letter-spacing:-0.01em;margin:0 0 20px">Quiénes somos</h2>
+        <p style="font-size:18px;line-height:1.65;color:#C7D4E6;margin:0">
+          Somos Manos a la Obra, una cooperativa de trabajo de Olavarría. Nos organizamos entre compañeros y compañeras para sostener servicios que la comunidad necesita todos los días. Creemos en el trabajo asociado como forma de generar empleo genuino y de cuidar lo que es de todos.
         </p>
       </div>
-      <ol class="timeline">
-        <li>
-          <span class="timeline-year">2022</span>
-          <span class="timeline-text">Se constituye la cooperativa Manos a la Obra.</span>
-        </li>
-        <li>
-          <span class="timeline-year">2024</span>
-          <span class="timeline-text">Asumimos la gestión del Cementerio Parque Loma de Paz.</span>
-        </li>
-        <li>
-          <span class="timeline-year">Hoy</span>
-          <span class="timeline-text">Somos 22 asociados y asociadas en crecimiento.</span>
-        </li>
-      </ol>
+
+      <div id="stats-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:72px">
+        <div style="text-align:center;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,0.04)">
+          <div style="font-size:44px;font-weight:700;color:#5AA9E6;margin-bottom:8px">2022</div>
+          <div style="font-size:15px;color:#C7D4E6">Nacimos como cooperativa de trabajo</div>
+        </div>
+        <div style="text-align:center;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,0.04)">
+          <div style="font-size:44px;font-weight:700;color:#5AA9E6;margin-bottom:8px">22</div>
+          <div style="font-size:15px;color:#C7D4E6">Asociados y asociadas hoy</div>
+        </div>
+        <div style="text-align:center;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,0.04)">
+          <div style="font-size:44px;font-weight:700;color:#5AA9E6;margin-bottom:8px">2024</div>
+          <div style="font-size:15px;color:#C7D4E6">Gestión del Cementerio Loma de Paz</div>
+        </div>
+      </div>
+
+      <div id="nosotros-grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center">
+        <image-slot id="nosotros-img" shape="rounded" radius="24" placeholder="Foto: equipo de la cooperativa" style="width:100%;height:380px"></image-slot>
+        <div style="position:relative;padding-left:32px;border-left:2px solid rgba(90,169,230,0.35)">
+          <div style="margin-bottom:32px">
+            <div style="font-size:14px;font-weight:700;color:#5AA9E6;margin-bottom:6px">2022</div>
+            <p style="font-size:16px;line-height:1.6;color:#C7D4E6;margin:0">Manos a la Obra nació como cooperativa de trabajo en Olavarría.</p>
+          </div>
+          <div style="margin-bottom:32px">
+            <div style="font-size:14px;font-weight:700;color:#5AA9E6;margin-bottom:6px">Septiembre 2024</div>
+            <p style="font-size:16px;line-height:1.6;color:#C7D4E6;margin:0">Asumimos la gestión del Cementerio Parque Loma de Paz, luego de que finalizara el contrato de concesión que durante ocho años estuvo a cargo de Transporte Malvinas.</p>
+          </div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#5AA9E6;margin-bottom:6px">Hoy</div>
+            <p style="font-size:16px;line-height:1.6;color:#C7D4E6;margin:0">Seguimos creciendo, sosteniendo puestos de trabajo genuino y sumando nuevas áreas de servicio para la comunidad.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- CONTACTO -->
-  <section id="contacto" class="contacto">
-    <div class="wrap">
-      <p class="eyebrow">Hablemos</p>
-      <h2>Contacto</h2>
+  <section id="contacto" style="background:#EAF3FB;padding:100px 32px">
+    <div style="max-width:1240px;margin:0 auto">
+      <div style="text-align:center;max-width:680px;margin:0 auto 64px">
+        <div style="font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#2C6E9E;margin-bottom:14px">Contacto</div>
+        <h2 style="font-size:40px;font-weight:700;letter-spacing:-0.01em;margin:0;color:#1B2A4A">Hablemos de tu proyecto</h2>
+      </div>
 
-      <div class="contacto-grid">
-
-        <div class="contacto-card">
-          <h3>Cementerio Parque Loma de Paz</h3>
-          <address>
-            <p>KM 302, RN 226 — B7400 Olavarría, Buenos Aires</p>
-            <p><a href="tel:+542284387438">+54 2284 387438</a></p>
-            <p><a href="mailto:manosalaobra.cooperativa.1@gmail.com">manosalaobra.cooperativa.1@gmail.com</a></p>
-            <p class="horario">Lun a Dom y feriados, 8 a 19 hs</p>
-          </address>
-          <a class="btn btn-whatsapp" href="https://wa.me/542284387438" target="_blank" rel="noopener">
-            Escribinos por WhatsApp
-          </a>
+      <div id="sedes-grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;margin-bottom:24px">
+        <div style="background:#fff;border-radius:24px;padding:40px;box-shadow:0 20px 40px -28px rgba(27,42,74,0.25)">
+          <h3 style="font-size:20px;font-weight:700;color:#1B2A4A;margin:0 0 20px">Cementerio Parque Loma de Paz</h3>
+          <div style="display:flex;flex-direction:column;gap:14px;font-size:15px;color:#3B4A63;line-height:1.5">
+            <div><strong style="color:#1B2A4A">Dirección:</strong> KM 302, RN 226 — B7400 Olavarría, Buenos Aires</div>
+            <div><strong style="color:#1B2A4A">Tel:</strong> +54 2284 387438</div>
+            <div><strong style="color:#1B2A4A">Email:</strong> manosalaobra.cooperativa.1@gmail.com</div>
+            <div><strong style="color:#1B2A4A">Horario:</strong> Lun a Dom y feriados, 8 a 19 hs</div>
+          </div>
+          <a href="{{ waCementerio }}" target="_blank" rel="noopener" style="margin-top:24px;display:flex;align-items:center;justify-content:center;gap:8px;background:#2E9E6B;color:#fff;padding:14px;border-radius:100px;font-size:15px;font-weight:600">WhatsApp Cementerio</a>
         </div>
-
-        <div class="contacto-card">
-          <h3>Oficina administrativa</h3>
-          <address>
-            <p>Moreno 2775, Olavarría</p>
-            <p><a href="tel:+542284477144">+54 2284 477144</a></p>
-            <p><a href="mailto:cementeriolomadepaz@gmail.com">cementeriolomadepaz@gmail.com</a></p>
-            <p class="horario">Lun a Vie, 8 a 15 hs</p>
-          </address>
+        <div style="background:#fff;border-radius:24px;padding:40px;box-shadow:0 20px 40px -28px rgba(27,42,74,0.25)">
+          <h3 style="font-size:20px;font-weight:700;color:#1B2A4A;margin:0 0 20px">Oficina administrativa</h3>
+          <div style="display:flex;flex-direction:column;gap:14px;font-size:15px;color:#3B4A63;line-height:1.5">
+            <div><strong style="color:#1B2A4A">Dirección:</strong> Moreno 2775, Olavarría</div>
+            <div><strong style="color:#1B2A4A">Tel:</strong> +54 2284 477144</div>
+            <div><strong style="color:#1B2A4A">Email:</strong> cementeriolomadepaz@gmail.com</div>
+            <div><strong style="color:#1B2A4A">Horario:</strong> Lun a Vie, 8 a 15 hs</div>
+          </div>
+          <a href="{{ waConstruccion }}" target="_blank" rel="noopener" style="margin-top:24px;display:flex;align-items:center;justify-content:center;gap:8px;background:#2C6E9E;color:#fff;padding:14px;border-radius:100px;font-size:15px;font-weight:600">Consultá por tu obra</a>
         </div>
+      </div>
 
-        <form class="contacto-form" id="contactForm" novalidate>
-          <h3>Envianos un mensaje</h3>
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" name="nombre" required>
-
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
-
-          <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-
-          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-          <p class="form-note" id="formNote" role="status"></p>
-        </form>
-
+      <div style="background:#fff;border-radius:24px;padding:48px;box-shadow:0 20px 40px -28px rgba(27,42,74,0.25)">
+        <h3 style="font-size:20px;font-weight:700;color:#1B2A4A;margin:0 0 28px">Escribinos</h3>
+        <sc-if value="{{ formSent }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:14px;background:#EAF3FB;border-radius:16px;padding:24px 28px">
+            <span style="width:36px;height:36px;border-radius:50%;background:#2E9E6B;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">✓</span>
+            <div>
+              <div style="font-weight:700;color:#1B2A4A;font-size:16px">¡Gracias por escribirnos!</div>
+              <div style="color:#3B4A63;font-size:14px;margin-top:2px">Te vamos a responder a la brevedad.</div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ formNotSent }}" hint-placeholder-val="{{ true }}">
+          <form id="form-grid" onSubmit="{{ handleSubmit }}" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px">
+            <div>
+              <label style="display:block;font-size:13px;font-weight:600;color:#1B2A4A;margin-bottom:8px">Nombre</label>
+              <input required="{{ true }}" type="text" value="{{ formData.nombre }}" onChange="{{ updateField('nombre') }}" style="width:100%;padding:13px 16px;border-radius:12px;border:1px solid #D8E3EC;font-size:15px;color:#1B2A4A;background:#fff" />
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:600;color:#1B2A4A;margin-bottom:8px">Teléfono</label>
+              <input type="tel" value="{{ formData.telefono }}" onChange="{{ updateField('telefono') }}" style="width:100%;padding:13px 16px;border-radius:12px;border:1px solid #D8E3EC;font-size:15px;color:#1B2A4A;background:#fff" />
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:600;color:#1B2A4A;margin-bottom:8px">Email</label>
+              <input required="{{ true }}" type="email" value="{{ formData.email }}" onChange="{{ updateField('email') }}" style="width:100%;padding:13px 16px;border-radius:12px;border:1px solid #D8E3EC;font-size:15px;color:#1B2A4A;background:#fff" />
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:600;color:#1B2A4A;margin-bottom:8px">Sector de interés</label>
+              <select value="{{ formData.sector }}" onChange="{{ updateField('sector') }}" style="width:100%;padding:13px 16px;border-radius:12px;border:1px solid #D8E3EC;font-size:15px;color:#1B2A4A;background:#fff">
+                <option value="">Elegí una opción</option>
+                <option value="construccion">Construcción</option>
+                <option value="cementerio">Cementerio</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <sc-if value="{{ isOtro }}" hint-placeholder-val="{{ false }}">
+              <div style="grid-column:1/-1">
+                <label style="display:block;font-size:13px;font-weight:600;color:#1B2A4A;margin-bottom:8px">Especificá</label>
+                <input type="text" value="{{ formData.otro }}" onChange="{{ updateField('otro') }}" style="width:100%;padding:13px 16px;border-radius:12px;border:1px solid #D8E3EC;font-size:15px;color:#1B2A4A;background:#fff" />
+              </div>
+            </sc-if>
+            <div style="grid-column:1/-1">
+              <label style="display:block;font-size:13px;font-weight:600;color:#1B2A4A;margin-bottom:8px">Mensaje</label>
+              <textarea required="{{ true }}" rows="4" value="{{ formData.mensaje }}" onChange="{{ updateField('mensaje') }}" style="width:100%;padding:13px 16px;border-radius:12px;border:1px solid #D8E3EC;font-size:15px;color:#1B2A4A;background:#fff;resize:vertical;font-family:inherit"></textarea>
+            </div>
+            <div style="grid-column:1/-1">
+              <button type="submit" style="background:#2C6E9E;color:#fff;padding:15px 36px;border-radius:100px;font-size:15px;font-weight:600;border:none;cursor:pointer">Enviar mensaje</button>
+            </div>
+          </form>
+        </sc-if>
       </div>
     </div>
   </section>
 
-</main>
+  <!-- FOOTER -->
+  <footer style="background:#1B2A4A;padding:48px 32px;border-top:1px solid rgba(255,255,255,0.08)">
+    <div style="max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="assets/logo-coop.png" alt="Manos a la Obra" style="height:36px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:0.9" />
+        <span style="color:#C7D4E6;font-size:14px">Cooperativa de Trabajo · Olavarría</span>
+      </div>
+      <div style="color:#8FA3C4;font-size:13px">© 2026 Manos a la Obra. Todos los derechos reservados.</div>
+    </div>
+  </footer>
 
-<footer class="site-footer">
-  <div class="wrap footer-inner">
-    <span>© <span id="year"></span> Manos a la Obra — Cooperativa de Trabajo</span>
-    <span>Olavarría, Buenos Aires</span>
-  </div>
-</footer>
+</div>
 
-<script src="script.js"></script>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = {
+    menuOpen: false,
+    formData: { nombre: '', telefono: '', email: '', sector: '', otro: '', mensaje: '' },
+    formSent: false
+  };
+
+  toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
+  closeMenu = () => this.setState({ menuOpen: false });
+
+  updateField = (field) => (e) => {
+    const value = e && e.target ? e.target.value : '';
+    this.setState(s => ({ formData: { ...s.formData, [field]: value } }));
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ formSent: true });
+  };
+
+  renderVals() {
+    const waConstruccion = "https://wa.me/542284387438?text=" + encodeURIComponent("Hola, quiero consultar por un trabajo de construcción.");
+    const waCementerio = "https://wa.me/542284387438?text=" + encodeURIComponent("Hola, quiero hacer una consulta sobre el Cementerio Parque Loma de Paz.");
+    return {
+      menuOpen: this.state.menuOpen,
+      toggleMenu: this.toggleMenu,
+      closeMenu: this.closeMenu,
+      waConstruccion,
+      waCementerio,
+      formData: this.state.formData,
+      updateField: this.updateField,
+      handleSubmit: this.handleSubmit,
+      formSent: this.state.formSent,
+      formNotSent: !this.state.formSent,
+      isOtro: this.state.formData.sector === 'otro'
+    };
+  }
+}
+
+</script>
 </body>
 </html>
