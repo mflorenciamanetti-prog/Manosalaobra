@@ -45,10 +45,15 @@ form.addEventListener('submit', async (e) => {
   submitBtn.textContent = 'Enviando...';
 
   try {
-    const response = await fetch(form.action, {
+    const response = await fetch('https://cementerio-app-nhsw.onrender.com/api/contacto', {
       method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
+      body: JSON.stringify({
+        nombre: form.nombre.value.trim(),
+        telefono: form.telefono.value.trim(),
+        email: form.email.value.trim(),
+        mensaje: form.mensaje.value.trim()
+      }),
+      headers: { 'Content-Type': 'application/json' }
     });
 
     if (response.ok) {
