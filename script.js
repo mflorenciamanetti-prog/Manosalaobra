@@ -23,40 +23,46 @@ document.querySelectorAll('.mobile-menu-link').forEach(link => {
   });
 });
 
-// Mostrar campo "Especificá" solo si eligen "Otro"
-const sectorSelect = document.getElementById('sectorSelect');
-const otroField = document.getElementById('otroField');
-sectorSelect.addEventListener('change', () => {
-  otroField.style.display = sectorSelect.value === 'otro' ? 'block' : 'none';
-});
+
 
 // Formulario de contacto: sin backend propio (GitHub Pages es estático).
 // Arma un mailto: con los datos cargados y muestra un mensaje de confirmación.
 const form = document.getElementById('form-grid');
 const formSuccess = document.getElementById('formSuccess');
+const formError = document.getElementById('formError');
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
+  formError.style.display = 'none';
 
   const nombre = form.nombre.value.trim();
   const email = form.email.value.trim();
-  const telefono = form.telefono.value.trim();
-  const sector = form.sector.value;
-  const otro = form.otro ? form.otro.value.trim() : '';
   const mensaje = form.mensaje.value.trim();
-
   if (!nombre || !email || !mensaje) return;
 
-  const sectorTexto = sector === 'otro' ? `Otro (${otro || 'sin especificar'})` : (sector || 'sin especificar');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando...';
 
-  const asunto = encodeURIComponent(`Consulta de ${nombre} desde la web`);
-  const cuerpo = encodeURIComponent(
-    `Nombre: ${nombre}\nTeléfono: ${telefono || '-'}\nEmail: ${email}\nSector de interés: ${sectorTexto}\n\nMensaje:\n${mensaje}`
-  );
-  window.location.href = `mailto:manosalaobra.cooperativa.1@gmail.com?subject=${asunto}&body=${cuerpo}`;
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
 
-  form.style.display = 'none';
-  formSuccess.style.display = 'flex';
+    if (response.ok) {
+      form.style.display = 'none';
+      formSuccess.style.display = 'flex';
+    } else {
+      throw new Error('Formspree error');
+    }
+  } catch (err) {
+    formError.textContent = 'No pudimos enviar tu mensaje. Probá de nuevo o escribinos a manosalaobra.cooperativa.1@gmail.com.';
+    formError.style.display = 'block';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar mensaje';
+  }
 });
 // Números que cuentan al entrar en pantalla
 const statNumbers = document.querySelectorAll('.stat-number');
@@ -79,3 +85,27 @@ const statObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 
 statNumbers.forEach(el => statObserver.observe(el));
+// Animaciones al hacer scroll: cada elemento entra con un delay creciente
+// respecto a los demás dentro de la misma sección (efecto escalonado natural).
+document.querySelectorAll('section').forEach(section => {
+  const items = section.querySelectorAll('.reveal-fade, .reveal-card');
+  if (!items.length) return;
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      items.forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 120);
+      });
+      sectionObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.15 });
+  sectionObserver.observe(section);
+});
+// Parallax liviano del hero
+const heroParallax = document.getElementById('hero-parallax');
+if (heroParallax) {
+  window.addEventListener('scroll', () => {
+    const offset = window.scrollY;
+    heroParallax.style.transform = `translateY(${offset * 0.35}px)`;
+  }, { passive: true });
+}
