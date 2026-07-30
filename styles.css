@@ -31,6 +31,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 #mobileMenu.open { display: flex !important; }
 
 @media (max-width: 860px) {
+  #servicios-grid { grid-template-columns: repeat(2,1fr) !important; }
+  #footer-grid { grid-template-columns: 1fr !important; }
   #nosotros-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
   #sobre-secundaria { position: static !important; width: 100% !important; height: 200px !important; margin-top: 12px !important; }
   #nav-links, #nav-cta { display: none !important; }
@@ -224,7 +226,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .area-sec-overlay strong { font-size:16px; }
 .area-sec-overlay span { font-size:13px; opacity:0.85; }
 .area-divider { text-align:center; margin:0 0 100px; padding-top:60px; border-top:1px solid #D8E3EC; }
-.area-divider img { height:90px; opacity:1; margin-bottom:20px; }
+.area-divider img { height:90px; max-width:90%; opacity:1; margin-bottom:20px; }
 .area-divider p { font-size:16px; font-weight:600; color:#5A7291; margin:0; }
 
 @media (max-width:860px) {
