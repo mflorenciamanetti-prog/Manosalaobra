@@ -31,6 +31,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 #mobileMenu.open { display: flex !important; }
 
 @media (max-width: 860px) {
+  #nosotros-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  #sobre-secundaria { position: static !important; width: 100% !important; height: 200px !important; margin-top: 12px !important; }
   #nav-links, #nav-cta { display: none !important; }
   #nav-burger { display: block !important; }
   #hero-grid { grid-template-columns: 1fr !important; }

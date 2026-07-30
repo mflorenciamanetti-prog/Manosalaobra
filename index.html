@@ -76,7 +76,7 @@
 
   <!-- SOBRE NOSOTROS -->
   <section id="nosotros" style="background-color:#FAFBFC;background-image:radial-gradient(#E5EBF2 1.5px, transparent 1.5px);background-size:26px 26px;width:100%;padding:70px 32px 100px">
-    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,0.45fr) minmax(0,0.55fr);gap:64px;align-items:start">
+    <div id="nosotros-grid" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,0.45fr) minmax(0,0.55fr);gap:64px;align-items:start">
 
       <div class="reveal-fade" style="position:relative;padding-bottom:20px">
         <div style="position:absolute;top:-30px;left:-30px;width:220px;height:220px;background:#2C6E9E;opacity:0.05;border-radius:32px;z-index:0"></div>
@@ -89,7 +89,7 @@
             <div style="position:absolute;bottom:-6px;left:24px;width:12px;height:12px;background:#fff;transform:rotate(45deg);box-shadow:2px 2px 4px -2px rgba(27,42,74,0.15)"></div>
           </div>
 
-          <img src="assets/sobre-secundaria.png" alt="Un compañero ayudando a otro" style="width:50%;height:170px;object-fit:cover;object-position:center top;border-radius:16px;border:4px solid #fff;box-shadow:0 16px 32px -16px rgba(27,42,74,0.3);position:absolute;bottom:-20px;right:8%">
+          <img id="sobre-secundaria" src="assets/sobre-secundaria.png" alt="Un compañero ayudando a otro" style="width:50%;height:170px;object-fit:cover;object-position:center top;border-radius:16px;border:4px solid #fff;box-shadow:0 16px 32px -16px rgba(27,42,74,0.3);position:absolute;bottom:-20px;right:8%">
         </div>
 
         <div style="display:flex;gap:16px;margin-top:56px;align-items:flex-start">
@@ -254,12 +254,8 @@
       </div>
     </div>
     <div class="area-secondary">
-      <a href="#" class="area-sec-card" style="background-image:url('assets/destacado1.png')">
-        <span class="area-sec-overlay"><strong>Proyecto destacado 1</strong><span>Breve descripción del proyecto</span></span>
-      </a>
-      <a href="#" class="area-sec-card" style="background-image:url('assets/destacado2.png')">
-        <span class="area-sec-overlay"><strong>Proyecto destacado 2</strong><span>Breve descripción del proyecto</span></span>
-      </a>
+      <a href="#" class="area-sec-card" style="background-image:url('assets/destacado1.png')"></a>
+      <a href="#" class="area-sec-card" style="background-image:url('assets/destacado2.png')"></a>
     </div>
   </div>
 
@@ -426,7 +422,7 @@
 
   <!-- FOOTER -->
   <footer style="background:#1B2A4A;padding:64px 32px 32px">
-    <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,0.8fr) minmax(0,1fr);gap:40px;margin-bottom:40px">
+    <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,0.8fr) minmax(0,1fr);gap:40px;margin-bottom:40px"><div id="nosotros-grid" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,0.45fr) minmax(0,0.55fr);gap:64px;align-items:start"></div>
       <div>
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
           <img src="assets/logo-coop.png" alt="Manos a la Obra" style="height:36px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:0.9">
