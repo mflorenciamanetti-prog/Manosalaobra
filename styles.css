@@ -59,6 +59,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background: #fff;
   border-bottom: 1px solid #E5E7EB;
 }
+.logo-anim {
+  animation: logoEntrance 0.7s ease both;
+  transition: transform 200ms ease;
+}
+.logo-anim:hover {
+  transform: scale(1.06);
+}
+@keyframes logoEntrance {
+  from { opacity: 0; transform: translateY(16px) rotate(0deg); }
+  to { opacity: 1; transform: translateY(0) rotate(360deg); }
+}
+.page-texture {
+  background: repeating-linear-gradient(135deg, #FFFFFF 0px, #FFFFFF 38px, #F4F7FA 38px, #F4F7FA 39px);
+}
 .nav-link {
   font-family: 'Inter', sans-serif;
   font-size: 15px;
