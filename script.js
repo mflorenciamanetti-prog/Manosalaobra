@@ -40,21 +40,20 @@ form.addEventListener('submit', async (e) => {
   const mensaje = form.mensaje.value.trim();
   if (!nombre || !email || !mensaje) return;
 
-  const token = await grecaptcha.execute('6LcIP3UtAAAAAIR-_p2AGsoyfBFSQZ3qu7d6DEMo', {action: 'contacto'});
+  
 
   const submitBtn = form.querySelector('button[type="submit"]');
   submitBtn.disabled = true;
   submitBtn.textContent = 'Enviando...';
 
   try {
-    const response = await fetch('https://manosalaobra-backend.onrender.com/api/contacto', {
+    const response = await fetch('https://cementerio-app-nhsw.onrender.com/api/contacto', {
       method: 'POST',
       body: JSON.stringify({
         nombre: form.nombre.value.trim(),
         telefono: form.telefono.value.trim(),
         email: form.email.value.trim(),
-        mensaje: form.mensaje.value.trim(),
-        token: token
+        mensaje: form.mensaje.value.trim()
       }),
       headers: { 'Content-Type': 'application/json' }
     });
