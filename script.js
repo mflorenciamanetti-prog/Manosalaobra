@@ -40,7 +40,7 @@ form.addEventListener('submit', async (e) => {
   const mensaje = form.mensaje.value.trim();
   if (!nombre || !email || !mensaje) return;
 
-  const token = await grecaptcha.execute('T6LcIP3UtAAAAAIR-_p2AGsoyfBFSQZ3qu7d6DEMo', {action: 'contacto'});
+  const token = await grecaptcha.execute('6LcIP3UtAAAAAIR-_p2AGsoyfBFSQZ3qu7d6DEMo', {action: 'contacto'});
 
   const submitBtn = form.querySelector('button[type="submit"]');
   submitBtn.disabled = true;
